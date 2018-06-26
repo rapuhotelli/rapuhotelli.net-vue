@@ -2,8 +2,11 @@ import Vue from "vue";
 import App from "./App.vue";
 import Vuex from "vuex";
 import Contentful from "./utils/contentful.js";
+import VueRouter from "vue-router";
+import 
 
 Vue.use(Vuex);
+Vue.use(VueRouter);
 
 const contentful = new Contentful();
 
@@ -13,6 +16,15 @@ const c = contentful.getEntries().then(e => {
   console.log(contentful.getAllIds(e))
 })
 */
+
+const router = new VueRouter({
+  routes: [
+    // dynamic segments start with a colon
+    { path: '/:year/:slug', component: BlogPost },
+    { path: '/:id', component: BlogPost }
+  ]
+})
+
 const store = new Vuex.Store({
   state: {
     loading: 0,
